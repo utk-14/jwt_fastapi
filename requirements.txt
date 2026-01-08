@@ -1,0 +1,10 @@
+pip install passlib[argon2]
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
+
+def secure_pwd(raw_password: str) -> str:
+    return pwd_context.hash(raw_password)
+
+def verify_pwd(plain: str, hashed: str) -> bool:
+    return pwd_context.verify(plain, hashed)
